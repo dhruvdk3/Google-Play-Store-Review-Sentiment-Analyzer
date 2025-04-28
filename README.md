@@ -4,7 +4,7 @@ A simple web app that fetches the 100 most recent Google Play reviews for a give
 
 ### Features
 
-- **Autocomplete** of app names (up to 5 suggestions) via Play Store search  
+- <mark>Autocomplete</mark> of app names via Play Store search  
 - **Review scraping** of the 100 newest reviews using `google-play-scraper`  
 - **Sentiment analysis** with `nlptown/bert-base-multilingual-uncased-sentiment` (local inference)  
 - **Average score** and review count displayed in a friendly UI  
@@ -24,7 +24,7 @@ We use the Hugging Face Transformers pipeline with the **`nlptown/bert-base-mult
 
 ```bash
 # Clone the repo
-git clone https://github.com/your-username/google-play-sentiment-analyzer.git
+git clone https://github.com/dhruvdk3/Google-Play-Store-Review-Sentiment-Analyzer.git
 cd google-play-sentiment-analyzer
 ```
 
