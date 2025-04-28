@@ -1,0 +1,2 @@
+backend/venv/**/libtorch_cpu.dylib filter=lfs diff=lfs merge=lfs -text
+frontend/node_modules/**/next-swc*.node filter=lfs diff=lfs merge=lfs -text
