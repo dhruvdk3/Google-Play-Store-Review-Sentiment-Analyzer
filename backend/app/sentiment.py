@@ -1,26 +1,31 @@
+import asyncio
 from transformers import pipeline
 from fastapi.concurrency import run_in_threadpool
 
-# Initialize the sentiment-analysis pipeline once (downloads on first run)
+# Instantiate once
 _sentiment_pipe = pipeline(
     "sentiment-analysis",
     model="nlptown/bert-base-multilingual-uncased-sentiment"
 )
 
-async def analyze_sentiments(texts: list[str]) -> list[int]:
-    """
-    Analyze a batch of review texts and return sentiment scores (1 to 5).
-    Runs the HuggingFace pipeline in a threadpool to avoid blocking the FastAPI event loop.
-    """
-    results = await run_in_threadpool(_sentiment_pipe, texts)
+MAX_CONCURRENT = 5
+BATCH_DELAY = 0.2
 
-    scores: list[int] = []
-    for res in results:
-        label = res.get("label", "")
-        try:
-            score = int(label.split()[0])
-        except Exception:
-            score = 3  # fallback to neutral
+async def analyze_sentiments(texts: list[str]) -> list[int]:
+    sem = asyncio.Semaphore(MAX_CONCURRENT)
+
+    async def analyze_one(text: str):
+        async with sem:
+            res = await run_in_threadpool(_sentiment_pipe, text)
+            label = res[0].get("label", "3")
+            return int(label.split()[0])
+
+    tasks = [asyncio.create_task(analyze_one(t)) for t in texts]
+    scores = []
+
+    for task in asyncio.as_completed(tasks):
+        score = await task
         scores.append(score)
+        await asyncio.sleep(BATCH_DELAY)
 
     return scores

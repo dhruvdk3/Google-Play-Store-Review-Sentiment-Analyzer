@@ -39,21 +39,17 @@ async def analyze_reviews(req: AnalyzeRequest):
     3. Analyze sentiments (scores 1–5)
     4. Return average score and review count
     """
-    # 1️⃣ Resolve human name → package ID
     try:
         app_id = await fetch_app_id(req.appName)
     except HTTPException:
         raise HTTPException(status_code=404, detail=f"App not found: {req.appName}")
 
-    # 2️⃣ Fetch reviews
     reviews = await fetch_reviews_for_app(app_id, count=100)
     if not reviews:
         raise HTTPException(status_code=404, detail="No reviews found for this app")
-
-    # 3️⃣ Analyze sentiments
+    
     scores = await analyze_sentiments(reviews)
 
-    # 4️⃣ Compute average
     average = sum(scores) / len(scores)
     return {
         "average_score": round(average, 2),

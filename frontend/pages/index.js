@@ -1,5 +1,3 @@
-// frontend/pages/index.js
-
 import { useState, useEffect, useRef } from "react";
 
 export default function Home() {
