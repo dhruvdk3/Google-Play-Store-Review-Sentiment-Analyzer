@@ -4,11 +4,11 @@ A simple web app that fetches the 100 most recent Google Play reviews for a give
 
 ### Features
 
-- <mark>Autocomplete</mark> of app names via Play Store search  
+- **Autocomplete** of app names via Play Store search.  
 - **Review scraping** of the 100 newest reviews using `google-play-scraper`  
-- **Sentiment analysis** with `nlptown/bert-base-multilingual-uncased-sentiment` (local inference)  
-- **Average score** and review count displayed in a friendly UI  
-- **Legend** explaining what each score (1–5) means  
+- **Sentiment analysis** with `nlptown/bert-base-multilingual-uncased-sentiment`
+- **Average score** and review count displayed. 
+- **Legend** explaining what each score (1–5) means
 
 ### Tech Stack
 
@@ -52,17 +52,18 @@ The frontend UI will now be available at http://localhost:3000.
 
 
 
-API Endpoints
-• GET /suggest-app?name=<query>&limit=<num>
+## API Endpoints ##
+- GET /suggest-app?name=<query>&limit=<num>
 Returns up to <limit> matching apps for autocomplete:
 ```bash
 { "results": [{ "appId": "...", "title": "..." }, …] }
 ```
 
-•POST /analyze-reviews
+- POST /analyze-reviews
 Request body:
-
+```bash
 { "appName": "Google Chrome" }
+```
 
 Response:
 
@@ -72,3 +73,29 @@ Response:
     "review_count":100
 }
 ```
+
+
+Markup : * Unofficial Scraping : google-play-scraper, which depends on Google’s HTML structure—can break if Google updates their site.
+          * Throttling
+          * Bullet list item 2
+          * Bullet list item 2
+          * Bullet list item 2
+          * Bullet list item 2
+
+	2.	
+	•	Too many requests to Google Play may get throttled or blocked.
+	•	No retry or IP-rotation implemented.
+	3.	Regional Limitations
+	•	Reviews fetched are US/English-only (hardcoded); results can differ by region or language.
+	4.	Recent Reviews Only
+	•	Fetches only the latest 100 reviews; does not reflect historical sentiment.
+	5.	Model Accuracy
+	•	Sentiment model (nlptown/bert-base-multilingual-uncased-sentiment) may miss nuances like sarcasm, slang, or emojis.
+	•	Provides only a general sentiment rating (1–5).
+	6.	Performance
+	•	Runs sentiment analysis locally; can become slow if scaled beyond current scope.
+	•	No GPU or performance optimizations implemented.
+	7.	No Caching
+	•	Results aren’t cached; repeated requests re-fetch and re-analyze each time.
+	8.	No Security Measures
+	•	Backend API lacks authentication or rate limits—currently open for unrestricted access.
