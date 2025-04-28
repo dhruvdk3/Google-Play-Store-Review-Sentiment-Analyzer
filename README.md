@@ -89,7 +89,7 @@ curl -X POST http://localhost:8000/analyze-reviews \
 ```
 These both should give a 200 OK Response in the termina
 
-### Play Store Data Access (Our Journey)
+### Play Store Data Access
 
 1. __Choosing the Data Source__ : Google’s Play Developer API only surfaces limited metadata and doesn’t expose full user review text without publishing credentials and options like SerpAPI or Apify exist, but they introduce ongoing costs and lock us into external SLAs. So the best decision was to go with __scraping__—it’s free, gives direct access to all review text, and keeps us in full control of the pipeline.
 
@@ -114,4 +114,4 @@ These both should give a 200 OK Response in the termina
 5.	__No Caching__ : Results aren’t cached; repeated requests re-fetch and re-analyze each time.
 
 
-<video src="https://github.com/dhruvdk3/Google-Play-Store-Review-Sentiment-Analyzer/blob/main/Demo/Demo.mov">
+[▶️ Watch the demo video](https://github.com/dhruvdk3/Google-Play-Store-Review-Sentiment-Analyzer/blob/main/Demo/Demo.mov)
