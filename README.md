@@ -114,4 +114,6 @@ These both should give a 200 OK Response in the termina
 5.	__No Caching__ : Results aren’t cached; repeated requests re-fetch and re-analyze each time.
 
 
-[▶️ Watch the demo video](https://github.com/dhruvdk3/Google-Play-Store-Review-Sentiment-Analyzer/blob/main/Demo/Demo.mp4)
+<video controls width="600">
+  <source src="https://github.com/dhruvdk3/Google-Play-Store-Review-Sentiment-Analyzer/blob/main/Demo/Demo.mp4?raw=true" type="video/mp4">
+</video>
