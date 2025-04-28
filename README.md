@@ -15,11 +15,10 @@ A simple web app that fetches the 100 most recent Google Play reviews for a give
 - **Backend**: FastAPI, Uvicorn, google-play-scraper, Transformers & PyTorch  
 - **Frontend**: Next.js, React  
 
-### Prerequisites
+### Sentiment Analysis Model
 
-- **Node.js** (v16+) & **npm**  
-- **Python** (v3.8+)  
-- Optional: GPU with MPS or CUDA for faster HF inference  
+We use the Hugging Face Transformers pipeline with the **`nlptown/bert-base-multilingual-uncased-sentiment`** model for local sentiment inference.
+
 
 ### Installation
 
@@ -27,67 +26,49 @@ A simple web app that fetches the 100 most recent Google Play reviews for a give
 # Clone the repo
 git clone https://github.com/your-username/google-play-sentiment-analyzer.git
 cd google-play-sentiment-analyzer
+```
 
-Backend
+## Backend ##
 
+```bash
 cd backend
 python3 -m venv venv
-source venv/bin/activate        # Windows: venv\Scripts\activate
+source venv/bin/activate
 pip install -r requirements.txt
+uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+```
+The backend API will now be available at http://localhost:8000
 
-Frontend
 
+## Frontend ##
+```bash
 cd frontend
 npm install
-
-Running Locally
-	1.	Start the backend
-
-cd backend
-source venv/bin/activate
-uvicorn app.main:app --reload
-
-The API will be available at http://localhost:8000.
-
-	2.	Start the frontend (in a new terminal)
-
-cd frontend
 npm run dev
+```
+The frontend UI will now be available at http://localhost:3000.
 
-The web UI will be at http://localhost:3000.
+
+
+
 
 API Endpoints
-	•	GET /suggest-app?name=<query>&limit=<num>
+• GET /suggest-app?name=<query>&limit=<num>
 Returns up to <limit> matching apps for autocomplete:
-
+```bash
 { "results": [{ "appId": "...", "title": "..." }, …] }
+```
 
-
-	•	POST /analyze-reviews
+•POST /analyze-reviews
 Request body:
 
-{ "appName": "Spotify" }
+{ "appName": "Google Chrome" }
 
 Response:
 
+```bash
 {
-  "average_score": 4.23,
-  "review_count": 100
+    "average_score":3.53,
+    "review_count":100
 }
-
-
-
-Limitations & Notes
-	•	Relies on an unofficial scraper; subject to Google Play throttling or schema changes.
-	•	Model checkpoint (~400 MB) must download on first run.
-	•	Analysis is done locally—consider using a hosted LLM API for higher throughput in production.
-	•	Currently fetches a fixed 100 reviews; you can expose this as a parameter if desired.
-
-⸻
-
-Feel free to tweak or expand as needed! Once you’ve added this, the final step is to record a short screencast (30–60 s) showing:
-	1.	Typing in an app name → selecting from autocomplete
-	2.	Clicking “Analyze Reviews”
-	3.	Viewing the average score + legend
-
-Let me know when you’re ready to wrap up or if you’d like any adjustments.
+```
