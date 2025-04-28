@@ -115,4 +115,4 @@ These both should give a 200 OK Response in the termina
 
 
 
-**[Demo video](https://github.com/dhruvdk3/Google-Play-Store-Review-Sentiment-Analyzer/blob/main/assets/Demo.mp4#)**
+**[Demo video](https://github.com/dhruvdk3/Google-Play-Store-Review-Sentiment-Analyzer/blob/main/assets/Demo.mp4#)** (click on this or go to assets) 
