@@ -115,9 +115,4 @@ These both should give a 200 OK Response in the termina
 
 
 
-## ▶️ Demo Video
-
-<video controls width="640" preload="metadata">
-  <source src="https://github.com/dhruvdk3/Google-Play-Store-Review-Sentiment-Analyzer/blob/main/assets/Demo.mp4#t=0.1" type="video/mp4">
-  Sorry, your browser doesn’t support embedded videos.
-</video>
+[Play the video in GitHub Pages](https://github.com/dhruvdk3/Google-Play-Store-Review-Sentiment-Analyzer/blob/main/assets/Demo.mp4#)
